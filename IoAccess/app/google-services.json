@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "404246772280",
+    "project_id": "ioaccess-11c80",
+    "storage_bucket": "ioaccess-11c80.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:404246772280:android:fd658371e06bf61ad804cd",
+        "android_client_info": {
+          "package_name": "dedesktop.br.ioaccess"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "404246772280-9grt6qdh4b62113k4adkj9vnnvk31ga6.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD_qMR-DooTARTxYPBRTj02xdOt1D4uXAo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "404246772280-9grt6qdh4b62113k4adkj9vnnvk31ga6.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
