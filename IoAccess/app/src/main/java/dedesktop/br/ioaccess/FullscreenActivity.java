@@ -2,6 +2,7 @@ package dedesktop.br.ioaccess;
 
 import android.annotation.SuppressLint;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
@@ -147,7 +148,7 @@ public class FullscreenActivity extends AppCompatActivity {
                                     task.getResult().getDocuments().get(0).getData().toString(),
                                     Toast.LENGTH_LONG);
                             toast.show();
-
+                            startActivity(new Intent(FullscreenActivity.this, QrActivity.class));
                         } else {
                             Toast toast = Toast.makeText(getApplicationContext(),
                                     "DEU RUIM",
