@@ -85,6 +85,7 @@ public class QrActivity extends AppCompatActivity implements ZXingScannerView.Re
                                 Toast.LENGTH_LONG);
                         toast.show();
                         FuncionarioEscaneado.setDados("Dados: " + document.getData());
+                        startActivity(new Intent(QrActivity.this, FuncionarioActivity.class));
                        // Log.d(TAG, "DocumentSnapshot data: " + document.getData());
                     } else {
                         Toast toast = Toast.makeText(getApplicationContext(),
