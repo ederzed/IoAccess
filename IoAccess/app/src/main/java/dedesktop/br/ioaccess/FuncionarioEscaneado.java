@@ -1,5 +1,6 @@
 package dedesktop.br.ioaccess;
 
+import android.content.Intent;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -13,16 +14,28 @@ import com.google.firebase.firestore.FirebaseFirestore;
 
 public class FuncionarioEscaneado {
     static String dados;
+    static String id;
 
-    public static String getNome_ges() {
-        return nome_ges;
+    public static String getGestor() {
+        return gestor;
     }
 
-    public static void setNome_ges(String nome_ges) {
-        FuncionarioEscaneado.nome_ges = nome_ges;
+    public static void setGestor(String gestor) {
+        FuncionarioEscaneado.gestor = gestor;
     }
 
-    static String nome_ges;
+    static String gestor;
+
+
+
+    public static String getId() {
+        return id;
+    }
+
+    public static void setId(String id) {
+        FuncionarioEscaneado.id = id;
+    }
+
     public static String getDados() {
         return dados;
     }
@@ -32,36 +45,15 @@ public class FuncionarioEscaneado {
     }
 
     String nome;
-    String gestor;
     int expediente;
     String ra_cracha;
+    String id_gestor;
 
     public FuncionarioEscaneado(String dados) {
-        FirebaseFirestore db = FirebaseFirestore.getInstance();
         String d[] = dados.split(",");
         this.ra_cracha = d[0].substring(d[0].indexOf('=')+1);
         this.nome = d[2].substring(d[2].indexOf('=')+1);
-        final String[] nome_ges = {""};
-        DocumentReference docRef = db.collection("Tabela_Gestor")
-                .document(d[1].substring(d[1].indexOf('=')+ 1));
-        docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                if (task.isSuccessful()) {
-
-                    DocumentSnapshot document = task.getResult();
-                    if (document.exists()) {
-                       FuncionarioEscaneado.setNome_ges(document.getData().toString().substring(
-                               document.getData().toString().lastIndexOf('=') + 1,
-                               document.getData().toString().indexOf('}')
-                               ));
-                    }
-                } else {
-                    FuncionarioEscaneado.setNome_ges("DEU RUIM");
-                }
-            }
-        });
-        this.gestor = FuncionarioEscaneado.getNome_ges();
+        this.id_gestor = d[1].substring(d[1].indexOf('=')+1);
         this.expediente =  Integer.parseInt(d[3].substring(d[3].indexOf('=') + 1).replace("}",""));
     }
 }

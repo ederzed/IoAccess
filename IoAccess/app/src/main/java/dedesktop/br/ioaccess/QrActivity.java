@@ -74,22 +74,43 @@ public class QrActivity extends AppCompatActivity implements ZXingScannerView.Re
         //setResult(RESULT_OK, intent);
 
         DocumentReference docRef = db.collection("Tabela_Funcionario").document(rawResult.getText());
+        FuncionarioEscaneado.setId(rawResult.getText());
         docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                 if (task.isSuccessful()) {
                     DocumentSnapshot document = task.getResult();
                     if (document.exists()) {
-                        Toast toast = Toast.makeText(getApplicationContext(),
-                                "Dados: " + document.getData(),
-                                Toast.LENGTH_LONG);
-                        toast.show();
                         FuncionarioEscaneado.setDados("Dados: " + document.getData());
-                        startActivity(new Intent(QrActivity.this, FuncionarioActivity.class));
-                       // Log.d(TAG, "DocumentSnapshot data: " + document.getData());
+                        DocumentReference docRef_ = db.collection("Tabela_Gestor").document((String)document.get("ID_Gestor"));
+                        docRef_.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                            @Override
+                            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                                if (task.isSuccessful()) {
+                                    DocumentSnapshot document_ = task.getResult();
+                                    if (document_.exists()) {
+                                       FuncionarioEscaneado.setGestor((String)document_.get("Nome"));
+                                        startActivity(new Intent(QrActivity.this, FuncionarioActivity.class));
+                                        // Log.d(TAG, "DocumentSnapshot data: " + document.getData());
+                                    } else {
+                                        Toast toast = Toast.makeText(getApplicationContext(),
+                                                "registro n encontrado inner",
+                                                Toast.LENGTH_LONG);
+                                        toast.show();
+                                        //  Log.d(TAG, "No such document");
+                                    }
+                                } else {
+                                    Toast toast = Toast.makeText(getApplicationContext(),
+                                            "DEU RUIM DNV",
+                                            Toast.LENGTH_LONG);
+                                    toast.show();
+                                    //Log.d(TAG, "get failed with ", task.getException());
+                                }
+                            }
+                        });
                     } else {
                         Toast toast = Toast.makeText(getApplicationContext(),
-                                "registro n encontrado",
+                                "registro n encontrado outer",
                                 Toast.LENGTH_LONG);
                         toast.show();
                       //  Log.d(TAG, "No such document");
@@ -103,6 +124,8 @@ public class QrActivity extends AppCompatActivity implements ZXingScannerView.Re
                 }
             }
         });
+
+
 
         finish();
     }

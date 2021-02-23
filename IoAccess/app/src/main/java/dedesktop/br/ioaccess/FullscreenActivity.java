@@ -144,10 +144,10 @@ public class FullscreenActivity extends AppCompatActivity {
                             //for (QueryDocumentSnapshot document : task.getResult()) {
                             //    Log.d(TAG, document.getId() + " => " + document.getData());
                             //}
-                            Toast toast = Toast.makeText(getApplicationContext(),
-                                    task.getResult().getDocuments().get(0).getData().toString(),
-                                    Toast.LENGTH_LONG);
-                            toast.show();
+                            //Toast toast = Toast.makeText(getApplicationContext(),
+                             //       task.getResult().getDocuments().get(0).getData().toString(),
+                             //       Toast.LENGTH_LONG);
+                           // toast.show();
                             startActivity(new Intent(FullscreenActivity.this, QrActivity.class));
                         } else {
                             Toast toast = Toast.makeText(getApplicationContext(),

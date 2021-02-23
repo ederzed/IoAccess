@@ -6,6 +6,30 @@
     android:layout_height="match_parent"
     tools:context=".FuncionarioActivity">
 
+    <Button
+        android:id="@+id/btnVermelho"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Vermelho"
+        app:layout_constraintBottom_toTopOf="@+id/btnSalvar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.825"
+        app:layout_constraintStart_toStartOf="@+id/guideline"
+        app:layout_constraintTop_toTopOf="@+id/guideline2"
+        app:layout_constraintVertical_bias="0.544" />
+
+    <Button
+        android:id="@+id/btnAmarelo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Amarelo"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/btnVermelho"
+        app:layout_constraintHorizontal_bias="0.57"
+        app:layout_constraintStart_toEndOf="@+id/btnVerde"
+        app:layout_constraintTop_toBottomOf="@+id/txtDadosFunc"
+        app:layout_constraintVertical_bias="0.656" />
+
     <TextView
         android:id="@+id/txtDadosFunc"
         android:layout_width="wrap_content"
@@ -31,4 +55,27 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         app:layout_constraintGuide_begin="470dp" />
+
+    <Button
+        android:id="@+id/btnVerde"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Verde"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.049"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtDadosFunc"
+        app:layout_constraintVertical_bias="0.656" />
+
+    <Button
+        android:id="@+id/btnSalvar"
+        android:layout_width="373dp"
+        android:layout_height="50dp"
+        android:text="Salvar"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnAmarelo"
+        android:onClick="inserirResultado"/>
 </androidx.constraintlayout.widget.ConstraintLayout>
