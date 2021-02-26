@@ -102,7 +102,7 @@ public class FuncionarioActivity extends AppCompatActivity {
                                     FuncionarioEscaneado.setUltima_saida((Timestamp)document.get("DateTime_Saida"));
                                 }
 
-                               
+
 
                                     if (((String) document.get("ID_Funcionario")).equals(FuncionarioEscaneado.getId())) {
                                         if(document.get("DateTime_Saida") == null){
@@ -120,6 +120,7 @@ public class FuncionarioActivity extends AppCompatActivity {
                                                     if (task.isSuccessful()) {
                                                         DocumentSnapshot _document = task.getResult();
                                                         if (_document.exists()) {
+
                                                             long hrs_trabalhadas =
                                                                     (((long)(Calendar.getInstance().getTime().getTime()
                                                                     - tempo_entrada.toDate().getTime()))
@@ -144,7 +145,7 @@ public class FuncionarioActivity extends AppCompatActivity {
                                                                         Toast.LENGTH_LONG);
                                                                 toastt.show();
 
-                                                                exp_atual.put("HoraExtra_Justificativa", "Aguardando justificativa");
+                                                                exp_atual.put("HoraExtra_Justificativa", "Realizou "+(hrs_trabalhadas - hrs_expediente)+" hora(s) de hora extra, Aguardando justificativa");
                                                             }
 
                                                             expediente.document(id_exp).update(exp_atual);
