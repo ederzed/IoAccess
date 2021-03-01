@@ -81,7 +81,7 @@ public class QrActivity extends AppCompatActivity implements ZXingScannerView.Re
                 if (task.isSuccessful()) {
                     DocumentSnapshot document = task.getResult();
                     if (document.exists()) {
-                        FuncionarioEscaneado.setDados("Dados: " + document.getData());
+                        FuncionarioEscaneado.setDados(document.get("RA_cracha") + "," + document.get("Nome") + "," + document.get("Expediente"));
                         DocumentReference docRef_ = db.collection("Tabela_Gestor").document((String)document.get("ID_Gestor"));
                         docRef_.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                             @Override

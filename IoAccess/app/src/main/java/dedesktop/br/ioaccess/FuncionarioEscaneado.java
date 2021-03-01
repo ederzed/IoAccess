@@ -66,9 +66,9 @@ public class FuncionarioEscaneado {
     public FuncionarioEscaneado(String dados) {
         FuncionarioEscaneado.setUltima_saida(new Timestamp(new Date(1)));
         String d[] = dados.split(",");
-        this.ra_cracha = d[0].substring(d[0].indexOf('=')+1);
-        this.nome = d[1].substring(d[1].indexOf('=')+1);
+        this.ra_cracha = d[0];
+        this.nome = d[1];
 
-        this.expediente =  Integer.parseInt(d[3].substring(d[3].indexOf('=') + 1).replace("}",""));
+        this.expediente =  Integer.parseInt(d[2]);
     }
 }

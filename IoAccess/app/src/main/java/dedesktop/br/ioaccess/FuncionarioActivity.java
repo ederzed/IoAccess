@@ -8,6 +8,7 @@ import java.util.Calendar;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Html;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -51,14 +52,18 @@ public class FuncionarioActivity extends AppCompatActivity {
         btnVermelho = (Button)findViewById(R.id.btnVermelho);
 
 
-        txtDadosFunc.setText("Nome: " + fs.nome + "\nRA: " + fs.ra_cracha + "\nGestor: " + FuncionarioEscaneado.getGestor() +
-                "\nExpediente: " + fs.expediente + " horas");
+        txtDadosFunc.setText(Html.fromHtml("<b>>Nome: </b>" + fs.nome + "<br><b>>RA: </b>" + fs.ra_cracha +
+                "<br><b>>Gestor: </b>" + FuncionarioEscaneado.getGestor() +
+                "<br><b>>Expediente: </b>" + fs.expediente + " hora(s)"));
 
         btnVerde.setOnClickListener(new View.OnClickListener()
         {
             @Override
             public void onClick(View v) {
                 humor_atual = "verde";
+                btnVerde.setText(Html.fromHtml("<html><b>VERDE</b></html>"));
+                btnAmarelo.setText("amarelo");
+                btnVermelho.setText("vermelho");
             }
         });
         btnVermelho.setOnClickListener(new View.OnClickListener()
@@ -66,6 +71,9 @@ public class FuncionarioActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 humor_atual = "vermelho";
+                btnVerde.setText("verde");
+                btnAmarelo.setText("amarelo");
+                btnVermelho.setText(Html.fromHtml("<b>VERMELHO</b>"));
             }
         });
         btnAmarelo.setOnClickListener(new View.OnClickListener()
@@ -73,6 +81,10 @@ public class FuncionarioActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 humor_atual = "amarelo";
+                btnVerde.setText("verde");
+                btnAmarelo.setText(Html.fromHtml("<b>AMARELO</b>"));
+                btnVermelho.setText("vermelho");
+
             }
         });
 
@@ -146,6 +158,7 @@ public class FuncionarioActivity extends AppCompatActivity {
                                                                 toastt.show();
 
                                                                 exp_atual.put("HoraExtra_Justificativa", "Realizou "+(hrs_trabalhadas - hrs_expediente)+" hora(s) de hora extra, Aguardando justificativa");
+                                                                exp_atual.put("aguardando_justificativa", true);
                                                             }
 
                                                             expediente.document(id_exp).update(exp_atual);
@@ -189,9 +202,14 @@ public class FuncionarioActivity extends AppCompatActivity {
                                                                     /(3600000));
                                                     if(descanso_real < descanso_devido ){
                                                         Toast toastt = Toast.makeText(getApplicationContext(),
-                                                                "CATRACA BLOQUEADA \nDescanso esperado: " + descanso_devido + "\nDescanso feito: " + descanso_real,
+                                                                "CATRACA BLOQUEADA \nDescanso esperado: " + descanso_devido + "h\nDescanso feito: " + descanso_real + "h",
                                                                 Toast.LENGTH_LONG);
                                                         toastt.show();
+                                                        FuncionarioEscaneado.setUltima_saida(new Timestamp(new Date(1)));
+                                                        FuncionarioEscaneado.setId("");
+                                                        FuncionarioEscaneado.setGestor("");
+                                                        FuncionarioEscaneado.setDados("");
+                                                        finish();
                                                     } else{
 
                                                         CollectionReference expediente = db.collection("Tabela_Expediente");
@@ -202,7 +220,7 @@ public class FuncionarioActivity extends AppCompatActivity {
                                                         exp_atual.put("ID_Funcionario", FuncionarioEscaneado.getId());
                                                         expediente.document().set(exp_atual);
                                                         Toast toastt = Toast.makeText(getApplicationContext(),
-                                                                "SALVO",
+                                                                "CATRACA LIBERADA",
                                                                 Toast.LENGTH_LONG);
                                                         toastt.show();
                                                         FuncionarioEscaneado.setUltima_saida(new Timestamp(new Date(1)));
